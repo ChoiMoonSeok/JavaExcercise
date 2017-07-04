@@ -1,0 +1,122 @@
+/*
+		 * 원래 이 방식을 사용하려 했으나 deplicated 되어서 바꿈
+		FileInputStream fis = null;
+		//워크북 생성
+		XSSFWorkbook workbook = null;
+		
+		try{
+			fis = new FileInputStream(filePath);
+			//XSSWorkbook은 엑셀파일 전체 내용을 담고있는 객체
+			workbook = new XSSFWorkbook(fis);
+			
+			//탐색에 사용할 sheet,row,cell객체
+			XSSFSheet curSheet;//현재 sheet
+			XSSFRow curRow;//현재 row
+			XSSFCell curCell;//현재 sell
+			BookMember member;//데이터저장을 위한 member
+			
+			//sheet 탐색 for문
+			for(int sheetIndex =0; sheetIndex<workbook.getNumberOfSheets(); sheetIndex++){
+				//현재 sheet 반환
+				curSheet = workbook.getSheetAt(sheetIndex);
+				//row 탐색 for문
+				for(int rowIndex =0; rowIndex < curSheet.getPhysicalNumberOfRows(); rowIndex++){
+					
+					//row 0은 해더이기 때문에 패스
+					if(rowIndex != 0){
+						//현재 row 반환
+						curRow = curSheet.getRow(rowIndex);
+						member = new BookMember();//엑셀에서 데이터를 읽어 드리기위한 객체
+						String value;//데이터 저장값
+						
+						//첫번째 셀이 비어져있지 않을 경우에만 cell 탐색
+						if(!"".equals(curRow.getCell(0).getStringCellValue())){
+							
+							//cell 탐색
+							for(int cellIndex =0; cellIndex< curRow.getPhysicalNumberOfCells(); cellIndex++){
+								curCell = curRow.getCell(cellIndex);
+								
+								if(true){
+									value = "";
+									//cell 스타일이 다르더라도 Stringd로 방출
+									switch(curCell.getCellTypeEnum()){
+										
+									case XSSFCell.CELL_TYPE_FORMULA:
+										value = curCell.getCellFormula();
+										break;
+									case XSSFCell.CELL_TYPE_NUMERIC:
+										value = curCell.getNumericCellValue()+"";
+										break;
+									case XSSFCell.CELL_TYPE_STRING:
+										value = curCell.getStringCellValue()+"";
+										break;
+									case XSSFCell.CELL_TYPE_BLANK:
+										value = curCell.getBooleanCellValue()+"";
+									case XSSFCell.CELL_TYPE_ERROR:
+										value = curCell.getErrorCellString()+"";
+										break;
+									default :
+										value = new String();
+										break;
+									}
+									//현재 column index에 따라 bookmember클래스에 설정
+									switch(cellIndex){
+									//관리번호
+									case 0:
+										member.setMgntNumber(value);
+										break;
+									//도서이름	
+									case 1:
+										member.setBookName(value);
+										break;
+									//작가
+									case 2:
+										member.setBookWriter(value);
+										break;
+									//출판사
+									case 3:
+										member.setPublisher(value);
+										break;
+									//구매가격
+									case 4:
+										member.setBookPrice(Integer.parseInt(value));
+										break;
+									//구매년도
+									case 5:
+										member.setPurchaseYear(Integer.parseInt(value));
+										break;
+									//구매이유
+									case 6:
+										member.setPurchaseReason(value);
+										break;
+										
+									}
+								}
+							}
+							bookList.bookList.add(member);	
+							tableModel.bookListModel.addRow(bookList.bookList.toArray());
+						}
+						
+					}
+				}
+			}
+		}
+		catch(FileNotFoundException fnfe){
+			JOptionPane.showMessageDialog(new MainFrame(), "파일을 찾을 수 업습니다.");
+		}
+		catch(IOException ioe){
+			ioe.printStackTrace();
+		}
+		finally{
+			try{
+				if(workbook != null)
+					workbook.close();
+				if(fis != null)
+					fis.close();
+				}
+				catch (Exception e){
+					
+				}
+		}
+		return bookList.bookList;
+		*/
